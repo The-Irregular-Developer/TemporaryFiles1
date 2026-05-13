@@ -1,0 +1,163 @@
+[gd_scene load_steps=10 format=3 uid="uid://drer5yfwpe0eb"]
+
+[ext_resource type="Texture2D" uid="uid://bq4wpsdj78cx5" path="res://sprites/HealthBar/ProgressBar_fill_1.png" id="2_8y7rk"]
+[ext_resource type="Texture2D" uid="uid://dxh3jvbxsexhx" path="res://sprites/HealthBar/ProgressBar_border.png" id="2_lqhkl"]
+[ext_resource type="Script" uid="uid://0o515cbh2nr4" path="res://scripts/player_hud.gd" id="3_er5qu"]
+[ext_resource type="LabelSettings" uid="uid://5dbs0s8pxw5j" path="res://sprites/label_setting.tres" id="4_qcjqi"]
+[ext_resource type="Script" uid="uid://bf1cbur7okjss" path="res://scripts/time_gui.gd" id="4_s25gh"]
+[ext_resource type="Texture2D" uid="uid://bpkhduj5qwug7" path="res://images/time_gui.png" id="5_s25gh"]
+[ext_resource type="Script" uid="uid://w4e0x3is6r0k" path="res://scripts/time_system.gd" id="7_lqhkl"]
+[ext_resource type="Script" uid="uid://ckvg3nu3jchvt" path="res://scripts/date_time.gd" id="8_8y7rk"]
+
+[sub_resource type="Resource" id="Resource_50hf8"]
+script = ExtResource("8_8y7rk")
+seconds = 0
+minutes = 35
+hours = 23
+days = 3
+metadata/_custom_type_script = "uid://ckvg3nu3jchvt"
+
+[node name="PlayerHud" type="CanvasLayer"]
+script = ExtResource("3_er5qu")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = 18.0
+offset_top = 19.0
+offset_right = 249.0
+offset_bottom = 46.0
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("2_8y7rk")
+texture_progress_offset = Vector2(0, -0.05)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(133, 35)
+scale = Vector2(5.5, 5.5)
+texture = ExtResource("2_lqhkl")
+
+[node name="TimeControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 921.0
+offset_top = 481.0
+offset_right = 1149.0
+offset_bottom = 640.0
+script = ExtResource("4_s25gh")
+
+[node name="Background" type="NinePatchRect" parent="TimeControl"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 9.0
+offset_right = 129.0
+offset_bottom = 75.0
+scale = Vector2(2, 2)
+texture = ExtResource("5_s25gh")
+region_rect = Rect2(0, 0, 16, 16)
+patch_margin_left = 7
+patch_margin_top = 7
+patch_margin_right = 7
+patch_margin_bottom = 7
+metadata/_edit_lock_ = true
+
+[node name="DayControl" type="Control" parent="TimeControl"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 103.0
+offset_top = 27.0
+offset_right = 150.0
+offset_bottom = 43.0
+metadata/_edit_lock_ = true
+
+[node name="days" type="Label" parent="TimeControl/DayControl"]
+layout_mode = 0
+offset_left = 13.2499
+offset_top = -9.0
+offset_right = 43.2499
+offset_bottom = 14.0
+scale = Vector2(2, 2)
+text = "999"
+label_settings = ExtResource("4_qcjqi")
+horizontal_alignment = 2
+metadata/_edit_lock_ = true
+
+[node name="sunsprite" type="Sprite2D" parent="TimeControl/DayControl"]
+position = Vector2(-9.75, 12)
+scale = Vector2(1.90625, 1.90625)
+texture = ExtResource("5_s25gh")
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 16)
+metadata/_edit_lock_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TimeControl"]
+layout_mode = 0
+offset_left = 53.0
+offset_top = 66.0
+offset_right = 205.0
+offset_bottom = 119.0
+texture = ExtResource("5_s25gh")
+region_rect = Rect2(16, 16, 16, 16)
+metadata/_edit_lock_ = true
+
+[node name="ClockControl" type="Control" parent="TimeControl/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.5
+offset_top = -7.5
+offset_right = 29.5
+offset_bottom = 7.5
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="hours" type="Label" parent="TimeControl/NinePatchRect/ClockControl"]
+layout_mode = 0
+offset_left = -4.5
+offset_top = -12.0
+offset_right = 15.5
+offset_bottom = 8.0
+scale = Vector2(2, 2)
+text = "23"
+label_settings = ExtResource("4_qcjqi")
+metadata/_edit_lock_ = true
+
+[node name="minutes" type="Label" parent="TimeControl/NinePatchRect/ClockControl"]
+layout_mode = 0
+offset_left = 52.5
+offset_top = -12.0
+offset_right = 72.5
+offset_bottom = 11.0
+scale = Vector2(2, 2)
+text = "59"
+label_settings = ExtResource("4_qcjqi")
+metadata/_edit_lock_ = true
+
+[node name="colon" type="Label" parent="TimeControl/NinePatchRect/ClockControl"]
+layout_mode = 0
+offset_left = 42.5
+offset_top = -13.0
+offset_right = 46.5
+offset_bottom = 10.0
+scale = Vector2(2, 2)
+text = ":"
+label_settings = ExtResource("4_qcjqi")
+metadata/_edit_lock_ = true
+
+[node name="clocksprite" type="Sprite2D" parent="TimeControl/NinePatchRect/ClockControl"]
+position = Vector2(-22.5, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("5_s25gh")
+region_enabled = true
+region_rect = Rect2(33, 0, 15, 16)
+metadata/_edit_lock_ = true
+
+[node name="TimeSystem" type="Node" parent="."]
+script = ExtResource("7_lqhkl")
+date_time = SubResource("Resource_50hf8")
+ticks_pr_second = 120
+metadata/_custom_type_script = "uid://w4e0x3is6r0k"
+
+[connection signal="updated" from="TimeSystem" to="TimeControl" method="_on_time_system_updated"]
